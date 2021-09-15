@@ -21,10 +21,15 @@ app.get('/', function(req, res){
 })
 
 serverSocket.on('connection', function(socket){
-    console.log('cliente conectado '+socket.id)
+    
 
     socket.on('chat msg', function(msg){
         console.log(`Msg recebida do cliente ${socket.io}: ${msg}`);
+        serverSocket.emit('chat msg',`Usuário ${nickname} conectou.`)
+    })
+
+    socket.on('login', function(nickname){
+        console.log('cliente conectado '+nickname)
         serverSocket.emit('chat msg', msg)
     })
 
