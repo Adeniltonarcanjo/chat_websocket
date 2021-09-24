@@ -1,3 +1,7 @@
+/* 
+CSS Adatado de https://github.com/Roger-Melo/lyrics-search/blob/master/style.css 
+@author Roger Melo 
+*/
 
 * {
 	box-sizing: border-box;
@@ -66,7 +70,7 @@ form button {
   position: absolute;
   top: 2px;
   right: 1px;
-  background-color: #159aa8;
+  background-color: #10cce0;
   border: 0;
   border-radius: 50px;
   color: #fff;

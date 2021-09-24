@@ -12,10 +12,10 @@
 <body>
 
     <header>
-        
         <form >
             <input type="text" id="msg" autofocus autocomplete="off" placeholder="Digite uma mensagem ao enviar">
             <button type="submit">Enviar</button>
+
         </form>
     </header>
     <ul id="mensagens"></ul>
@@ -26,8 +26,6 @@
            const socket=io() 
            socket.nickname = ''          
 
-
-           // o primeiro texto será o nickname 
            $('form').submit(function(evt) {
             if (socket.nickname==''){
                 socket.nickname = $('#msg').val()
