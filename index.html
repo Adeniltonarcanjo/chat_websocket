@@ -5,15 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Websocket</title>
+    <!-- referenciando o arquivo CSS-->
     <link rel="stylesheet" href="estilo.css">
+
+    
     <script src="/socket.io/socket.io.js"></script>
+    <!---->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
 
     <header>
         <form >
-            <input type="text" id="msg" autofocus autocomplete="off" placeholder="Digite uma mensagem ao enviar">
+            <input type="text" id="msg" autofocus autocomplete="off" placeholder="Digite o nickname">
             <button type="submit">Enviar</button>
 
         </form>
@@ -26,19 +30,23 @@
            const socket=io() 
            socket.nickname = ''          
 
+         // mensagem que esta sendo enviada para o servidor 
            $('form').submit(function(evt) {
-            if (socket.nickname==''){
+            if (socket.nickname===''){
                 socket.nickname = $('#msg').val()
                 socket.emit('login', $('#msg').val())
+                $('input').attr('placeholder','Digite uma mensagem');
+                
+                
             }else{
                 socket.emit('chat msg', $('#msg').val())
+                
             }
-
           
             $('#msg').val('');
             return false;
 
-           })
+           });
 
            socket.on('chat msg', function(msg){
            $('#mensagens').append($('<li>').text(msg))
