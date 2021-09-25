@@ -19,7 +19,7 @@ ul {
 }
 
 ul li:before {
-    content: "\1F63A";
+    content: "\26AB";
     margin: 0 0.5em;
 }
 
