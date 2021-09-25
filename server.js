@@ -24,28 +24,35 @@ app.get('/', function(req, res){
 })
 
 
+serverSocket.on('connection', recebeConexaoUsuario );
 
-serverSocket.on('connection', function(socket){    
+function recebeConexaoUsuario(socket){    
+    
+    socket.on('login', (nickname)=> registraLoginUsuario(socket,nickname))   
 
-    
-    socket.on('login', function(nickname){
-        //console.log('cliente conectado '+nickname)
-        serverSocket.emit('chat msg',  `${nickname} entrou na sala`)
-        socket.nickname=nickname
-    })
-   
-    
     // ao executar mensagem chat msg, executar a função
-    socket.on('chat msg', function(msg){
-      //  console.log(`Msg recebida do cliente ${socket.nickname}: ${msg}`);
-        serverSocket.emit('chat msg',`${socket.nickname}: ${msg}`);
-    })
+    socket.on('chat msg',(msg)=>encaminhaMensagensUsuarios(socket,msg))
 
-    socket.on('status', function(msg){
-        //  console.log(`Msg recebida do cliente ${socket.nickname}: ${msg}`);
-          socket.broadcast.emit('status',msg);
-      })
+    socket.on('status', (msg)=>encaminhaMsgStatus(socket,msg) )
 
     
-});
+}
 
+
+function encaminhaMsgStatus(socket,msg){
+    //  console.log(`Msg recebida do cliente ${socket.nickname}: ${msg}`);
+      socket.broadcast.emit('status',msg);
+  }
+
+
+function encaminhaMensagensUsuarios(socket,msg){
+    //  console.log(`Msg recebida do cliente ${socket.nickname}: ${msg}`);
+      serverSocket.emit('chat msg',`${socket.nickname}: ${msg}`);
+  }
+
+
+function registraLoginUsuario(socket,nickname){
+    //console.log('cliente conectado '+nickname)
+    serverSocket.emit('chat msg',  `${nickname} entrou na sala`)
+    socket.nickname=nickname
+}
