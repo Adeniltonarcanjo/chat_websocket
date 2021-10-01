@@ -10,11 +10,11 @@ const http = require('http').Server(app);
 const serverSocket = require('socket.io')(http);
 
 
-const PORT=4000|| process.env.PORT;
+const PORT=3000|| process.env.PORT;
 
 http.listen(PORT, function(){
 
-console.log("servidor iniciado na porta 4000");
+console.log("servidor iniciado na porta 3000");
 
 });
 
